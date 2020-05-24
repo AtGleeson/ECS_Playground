@@ -4940,7 +4940,7 @@ PrefabInstance:
     - target: {fileID: 6936240554816982101, guid: a74d2ec5febf0514aa9629ecbbfccc44,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.5
+      value: -7.54
       objectReference: {fileID: 0}
     - target: {fileID: 6936240554816982101, guid: a74d2ec5febf0514aa9629ecbbfccc44,
         type: 3}
@@ -35804,12 +35804,12 @@ GameObject:
   - component: {fileID: 1392995943}
   - component: {fileID: 1392995944}
   - component: {fileID: 1392995945}
+  - component: {fileID: 1392995946}
   - component: {fileID: 1392995942}
   - component: {fileID: 1392995941}
   - component: {fileID: 1392995940}
   - component: {fileID: 1392995939}
   - component: {fileID: 1392995938}
-  - component: {fileID: 1392995946}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged

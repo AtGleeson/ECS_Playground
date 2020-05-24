@@ -1,11 +1,12 @@
-﻿using Unity.Collections;
+﻿using Unity.Burst;
+using Unity.Collections;
 using Unity.Entities;
 using Unity.Jobs;
 using Unity.Physics;
 using Unity.Physics.Systems;
-using UnityEngine;
 
 [AlwaysSynchronizeSystem]
+[UpdateBefore(typeof(EntityGarbageCollectionSystem))]
 public class PickupSystem : JobComponentSystem
 {
     private BeginInitializationEntityCommandBufferSystem bufferSystem;
@@ -37,9 +38,11 @@ public class PickupSystem : JobComponentSystem
         };
         inputDependencies = triggerJob.Schedule(stepPhysicsWorld.Simulation, ref buildPhysicsWorld.PhysicsWorld, inputDependencies);
         bufferSystem.AddJobHandleForProducer(inputDependencies);
+
         return inputDependencies;
     }
     
+    [BurstCompile]
     private struct PickupTriggerJob : ITriggerEventsJob
     {
         public EntityCommandBuffer commandBuffer;
@@ -58,9 +61,9 @@ public class PickupSystem : JobComponentSystem
         {
             if (playerEntities.HasComponent(entityA) && pickUpEntities.HasComponent(entityB)) {
                 if (!deletableEntities.HasComponent(entityB)) {
-                    commandBuffer.AddComponent(entityB, new DeleteTag());
-                    return true;
+                    commandBuffer.AddComponent(entityB, new DeleteTag());                    
                 }
+                return true;
             }
             return false;
         }

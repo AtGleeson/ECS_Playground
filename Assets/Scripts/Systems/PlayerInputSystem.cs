@@ -27,6 +27,7 @@ public class PlayerInputSystem : JobComponentSystem
         Entities.ForEach((ref PlayerInputData inputData) => {
             inputData.state = stupidInputCopy[inputData.id];
         }).Run();
+        stupidInputCopy.Dispose();
 
         return default;
     }

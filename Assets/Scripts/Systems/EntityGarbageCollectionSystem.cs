@@ -3,7 +3,6 @@ using Unity.Jobs;
 using Unity.Collections;
 
 [AlwaysSynchronizeSystem]
-[UpdateAfter(typeof(PickupSystem))]
 public class EntityGarbageCollectionSystem : JobComponentSystem
 {
     protected override JobHandle OnUpdate(JobHandle inputDeps)
