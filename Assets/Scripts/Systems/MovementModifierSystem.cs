@@ -23,7 +23,7 @@ public class MovementModifierSystem : JobComponentSystem
             location.Value.xyz += (float3)(normDirection * modifier.speed * deltaTime);
         }).Run();
 
-        // HorizontalSineMovementModifier
+        // HorizontalWaveMovementModifier
         Entities.ForEach((ref Translation location, ref HorizontalWaveMovementModifier data) => {
             data.currentPhase += deltaTime * data.frequency;
             if (data.currentPhase >= maxRadians) {
@@ -32,7 +32,7 @@ public class MovementModifierSystem : JobComponentSystem
             location.Value.x += math.cos(data.currentPhase) * data.distance * deltaTime;
         }).Run();
 
-        // VerticalSineMovementModifier
+        // VerticalWaveMovementModifier
         Entities.ForEach((ref Translation location, ref VerticalWaveMovementModifier data) => {
             data.currentPhase += deltaTime * data.frequency;
             if (data.currentPhase >= maxRadians) {
