@@ -20,7 +20,8 @@ public class PlayerInputSystem : JobComponentSystem
         float deltaTime = Time.DeltaTime;
 
         // Grab all player inputs
-        inputStates[0].Movement = new float2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        inputStates[0].Movement.x = Input.GetAxis("Horizontal");
+        inputStates[0].Movement.y = Input.GetAxis("Vertical");
         inputStates[0].IsJumping = Input.GetAxis("Jump") >= 0.2f;
 
         NativeArray<PlayerInputState> stupidInputCopy = new NativeArray<PlayerInputState>(inputStates, Allocator.Temp);

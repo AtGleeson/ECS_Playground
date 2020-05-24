@@ -36,10 +36,10 @@ public class PickupSystem : JobComponentSystem
             deletableEntities = GetComponentDataFromEntity<DeleteTag>(),
             commandBuffer = bufferSystem.CreateCommandBuffer()
         };
-        inputDependencies = triggerJob.Schedule(stepPhysicsWorld.Simulation, ref buildPhysicsWorld.PhysicsWorld, inputDependencies);
-        bufferSystem.AddJobHandleForProducer(inputDependencies);
+        JobHandle job = triggerJob.Schedule(stepPhysicsWorld.Simulation, ref buildPhysicsWorld.PhysicsWorld, inputDependencies);
+        job.Complete();
 
-        return inputDependencies;
+        return default;
     }
     
     [BurstCompile]
