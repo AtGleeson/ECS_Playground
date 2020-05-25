@@ -9,13 +9,13 @@ using Unity.Physics.Systems;
 [UpdateBefore(typeof(EntityGarbageCollectionSystem))]
 public class HealthSystem : JobComponentSystem
 {
-    private BeginInitializationEntityCommandBufferSystem bufferSystem;
+    private BeginSimulationEntityCommandBufferSystem bufferSystem;
     private BuildPhysicsWorld buildPhysicsWorld;
     private StepPhysicsWorld stepPhysicsWorld;
 
     protected override void OnCreate()
     {
-        bufferSystem = World.GetOrCreateSystem<BeginInitializationEntityCommandBufferSystem>();
+        bufferSystem = World.GetOrCreateSystem<BeginSimulationEntityCommandBufferSystem>();
         buildPhysicsWorld = World.GetOrCreateSystem<BuildPhysicsWorld>();
         stepPhysicsWorld = World.GetOrCreateSystem<StepPhysicsWorld>();
     }
@@ -42,7 +42,7 @@ public class HealthSystem : JobComponentSystem
         return default;
     }
 
-    //[BurstCompile]
+    [BurstCompile]
     private struct HealthTriggerJob : ITriggerEventsJob
     {
         public EntityCommandBuffer commandBuffer;
