@@ -41,7 +41,6 @@ public class WeaponFireSystem : SystemBase
             .WithBurst(FloatMode.Default, FloatPrecision.Standard, true)
             .ForEach((Entity entity, int entityInQueryIndex, in PlayerInputData inputData, in WeaponFireData weaponData, in LocalToWorld location) => {
                 if (inputData.state.IsJumping) {
-                   // List<Entity> entities = new List<Entity>();                    
                     
                     float halfAngle = weaponData.hSpreadAngle / 2;
                     float direction = -1.0f;
@@ -51,7 +50,6 @@ public class WeaponFireSystem : SystemBase
                     for (int i = 1; i <= horizontalCount; ++i) {
                         var bullet = commandBuffer.Instantiate(entityInQueryIndex, weaponData.bulletPrefab);
                         commandBuffer.SetComponent(entityInQueryIndex, bullet, new Translation { Value = location.Position });
-                        //entities.Add(bullet);
 
                         int angleSpacing = 1 + (i / 2);
                         float newAngle = (halfAngle * direction * angleSpacing);
@@ -63,7 +61,6 @@ public class WeaponFireSystem : SystemBase
                     if (countIsOdd) { // spawn the default if we're an odd count
                         var bullet = commandBuffer.Instantiate(entityInQueryIndex, weaponData.bulletPrefab);
                         commandBuffer.SetComponent(entityInQueryIndex, bullet, new Translation { Value = location.Position });
-                        //entities.Add(bullet);
                     }
                 }
             }).ScheduleParallel();
