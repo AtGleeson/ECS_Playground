@@ -19,10 +19,7 @@ public class SplineMovementSystem : JobComponentSystem
             }
 
             if (!splineData.isActive) {
-                // Lol, this breaks shadows until all ships are active
-                translation.Value.x = float.MaxValue;
-                translation.Value.y = float.MaxValue;
-                translation.Value.z = float.MaxValue;
+                translation.Value.y = -1.0f;    // hide below the level for now
                 return;
             }
 
