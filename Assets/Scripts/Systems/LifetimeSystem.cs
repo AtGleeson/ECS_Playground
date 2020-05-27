@@ -22,7 +22,7 @@ public class LifetimeSystem : JobComponentSystem
         ComponentDataFromEntity<DeleteTag> deletableEntities = GetComponentDataFromEntity<DeleteTag>(true);
         EntityCommandBuffer commandBuffer = entityCommandBufferSystem.CreateCommandBuffer();
 
-        Entities.ForEach((Entity entity, int entityInQueryIndex, ref LifetimeData lifetime) => {
+        Entities.ForEach((Entity entity, ref LifetimeData lifetime) => {
             lifetime.timeRemaining -= deltaTime;
             if (lifetime.timeRemaining <= 0) {
                 if (!deletableEntities.HasComponent(entity)) {

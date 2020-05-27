@@ -1,5 +1,4 @@
-﻿using Unity.Collections;
-using Unity.Entities;
+﻿using Unity.Entities;
 using Unity.Jobs;
 using Unity.Mathematics;
 using Unity.Transforms;
@@ -11,10 +10,23 @@ public class SplineMovementSystem : JobComponentSystem
     protected override JobHandle OnUpdate(JobHandle inputDeps)
     {
         float deltaTime = Time.DeltaTime;
-        BezierSpline[] splines = EnemyFactory.instance.GetSplines();
 
-        Entities.ForEach((ref Translation translation, ref Rotation rotation, ref SplineMovementData splineData) => {
-            BezierSpline spline = splines[splineData.splineIndex];
+        Entities.ForEach((Entity entity, ref Translation translation, ref Rotation rotation, ref SplineMovementData splineData) => {
+            splineData.movementDelay -= deltaTime;
+            if (!splineData.isActive && splineData.movementDelay <= 0) {
+                splineData.isActive = true;
+                splineData.progress -= splineData.movementDelay; // subtract movementDelay from progress to make sure we start in the right position  and don't lose time
+            }
+
+            if (!splineData.isActive) {
+                // Lol, this breaks shadows until all ships are active
+                translation.Value.x = float.MaxValue;
+                translation.Value.y = float.MaxValue;
+                translation.Value.z = float.MaxValue;
+                return;
+            }
+
+            BezierSpline spline = SplineManager.GetSpline(splineData.splineIndex);
             if (splineData.goingForward) {
                 splineData.progress += deltaTime / splineData.duration;
                 if (splineData.progress > 1f) {

@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 6039968266499393644}
   - component: {fileID: 6039968266499393651}
   - component: {fileID: 6039968266499393640}
+  - component: {fileID: 3178578725590796138}
+  - component: {fileID: 1630510042941298492}
   - component: {fileID: 6039968266499393647}
   m_Layer: 0
   m_Name: Enemy
@@ -90,7 +92,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6039968266499393650}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2
@@ -111,9 +113,38 @@ MonoBehaviour:
   splineIndex: 0
   mode: 0
   duration: 10
+  movementDelay: 0
   lookForward: 1
   progress: 0
   goingForward: 0
+  isActive: 0
+--- !u!114 &3178578725590796138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6039968266499393650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d6d65993aa8e1d4288581a717bb9a3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageAmount: 1
+  destroyOnCollision: 1
+--- !u!114 &1630510042941298492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6039968266499393650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b105350c8d3e104ba1145f5285498f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  current: 10
 --- !u!114 &6039968266499393647
 MonoBehaviour:
   m_ObjectHideFlags: 0
